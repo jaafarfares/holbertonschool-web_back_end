@@ -4,11 +4,9 @@ a list input_list of floats as argument and
 returns their sum as a float. """
 
 
-
-def sum_list(input_list: list([float])) -> float:
+def sum_list(input_list: list[float]) -> float:
     """ takes a list input_list of floats and return their sum"""
-    summ: int = 0
-    for i in input_list:
-            summ += i
-        
+    summ: float = 0
+    for item in input_list:
+        summ += item
     return summ
