@@ -6,4 +6,4 @@ from typing import List, Union, Tuple
 
 def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """pass the first element as str and multiply the others"""
-    return (k, v*v)
+    return (k, v * v)
