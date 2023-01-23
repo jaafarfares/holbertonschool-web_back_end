@@ -4,9 +4,6 @@ v as arguments and returns a tuple"""
 from typing import List, Union, Tuple
 
 
-def to_kv(k: str, v: Union[int, float]) -> Tuple:
+def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
     """pass the first element as str and multiply the others"""
-    if isinstance(v, int):
-        v = float(v)
-    square: tuple[str, float] = (k, v*v)
-    return square
+    return (k, float(v**2))
