@@ -6,7 +6,17 @@ All functions have been annotated with type hints.
 """
 import typing
 
+
 def zoom_array(lst: tuple, factor: int = 2) -> list:
+    """_summary_
+
+    Args:
+        lst (tuple): _description_
+        factor (int, optional): _description_. Defaults to 2.
+
+    Returns:
+        list: _description_
+    """
     zoomed_in: list = [
         item for item in lst
         for i in range(factor)
