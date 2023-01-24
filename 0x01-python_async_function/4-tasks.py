@@ -6,7 +6,6 @@ from typing import List
 task_wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
-
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """_summary_
     return the list of all the delays
@@ -17,4 +16,3 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
         delays.append(delay)
         delays = sorted(delays)
     return delays
-
