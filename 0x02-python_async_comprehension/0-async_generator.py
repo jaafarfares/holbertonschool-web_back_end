@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
-"""_summary_
+"""    # loop 10 times
+    for i in range(10):
+        # wait 1 second asynchronously
+        await asyncio.sleep(1)
+        # yield a random number between 0 and 10
 """
 import random
 import asyncio
 
 
 async def async_generator():
-    """_summary_
-
-    Yields:
-        _type_: _description_
+    """
+    use the async for loop to iterate over
+    the values yielded by the coroutine
     """
     for i in range(10):
         await asyncio.sleep(1)
