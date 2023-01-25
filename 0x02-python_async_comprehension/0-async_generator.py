@@ -7,10 +7,10 @@
 """
 import random
 import asyncio
-from typing import List, AsyncGenerator
+from typing import List, Generator
 
 
-async def async_generator() -> AsyncGenerator[float, None]:
+async def async_generator() -> Generator[float, None, None]:
     """
     use the async for loop to iterate over
     the values yielded by the coroutine
