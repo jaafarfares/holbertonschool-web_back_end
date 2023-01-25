@@ -2,12 +2,12 @@
 """_summary_
 """
 import time
-from typing import List
+from typing import List, Generator
 import asyncio
 async_comprehension = __import__('1-async_comprehension').async_comprehension
 
 
-async def measure_runtime() -> List[float]:
+async def measure_runtime() -> Generator[float, None, None]:
     """
     Run time for four parallel comprehensions
     Returns:
@@ -17,5 +17,5 @@ async def measure_runtime() -> List[float]:
     for i in range(4):
         await asyncio.gather((async_comprehension()))
         end = time.time()
-        total = start - end
+        total = end - start
     return total
