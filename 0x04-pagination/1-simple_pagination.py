@@ -39,9 +39,9 @@ class Server:
         AssertionError: If either `page` or `page_size` is not an integer
         greater than 0. """
         assert isinstance(
-            page, int) and page > 0,
+            page, int) and page > 0
         assert isinstance(
-            page_size, int) and page_size > 0,
+            page_size, int) and page_size > 0
         rows = self.dataset()
 
         start, end = self.index_range(page, page_size)
