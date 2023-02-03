@@ -13,5 +13,4 @@ def filter_datum(fields: List[str], redaction: str,
     """
     for field in fields:
         pattern = rf"{field}=.*?{separator}"
-        var = f"{field}={redaction}{separator}"
-    return re.sub(pattern, var, message)
+    return re.sub(pattern, f"{field}={redaction}{separator}", message)
