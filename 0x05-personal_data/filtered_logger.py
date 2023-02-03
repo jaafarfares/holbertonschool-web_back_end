@@ -5,7 +5,18 @@ import re
 from typing import List
 
 
+def filter_datum(fields: List[str], redaction: str, message: str,
+                 separator: str) -> str:
+    """_summary_
 
-def filter_datum(fields: List[str], redaction: str, message: str, separator: str) -> str:
+    Args:
+        fields (List[str]): _description_
+        redaction (str): _description_
+        message (str): _description_
+        separator (str): _description_
+
+    Returns:
+        str: _description_
+    """
     fields_pattern = '|'.join(fields)
     return re.sub(fields_pattern, redaction, message,  flags=re.S)
