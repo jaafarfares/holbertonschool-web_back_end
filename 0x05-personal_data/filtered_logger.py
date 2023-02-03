@@ -6,8 +6,8 @@ import re
 from typing import List
 
 
-def filter_datum(fields: List[str], redaction: str, message: str,
-                 separator: str) -> str:
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """_summary_
 
     Args:
@@ -20,6 +20,6 @@ def filter_datum(fields: List[str], redaction: str, message: str,
         str: _description_
     """
     for field in fields:
-        var = re.sub(rf"{field}=.*?{separator}",
-                         f"{field}={redaction}{separator}", message)
-    return var
+        pattern = rf"{field}=.*?{separator}"
+        var = f"{field}={redaction}{separator}"
+    return re.sub(pattern, var, message)
