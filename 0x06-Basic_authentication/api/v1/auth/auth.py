@@ -7,6 +7,10 @@ from typing import List, TypeVar
 
 
 class Auth():
+    """
+    auth class description
+    """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """
         require auth function
