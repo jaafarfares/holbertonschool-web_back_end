@@ -62,7 +62,7 @@ class BasicAuth(Auth):
         """
         user object from credentails
         """
-        if not isinstance(user_email, str) or isinstance(user_pwd, str):
+        if not isinstance(user_email, str) or not isinstance(user_pwd, str):
             return None
         try:
             users = User.search({'email': user_email})
