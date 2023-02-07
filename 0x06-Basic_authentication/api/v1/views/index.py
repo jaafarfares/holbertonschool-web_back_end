@@ -3,6 +3,9 @@
 """
 from flask import jsonify, abort
 from api.v1.views import app_views
+import sys
+sys.path.append('/home/jaafar/holberton/holbertonschool-web_back_end/0x06-Basic_authentication')
+
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
@@ -21,6 +24,15 @@ def unauthorized() -> str:
         - the err 401 using abort
     """
     abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden() -> str:
+    """ GET /api/v1/forbidden
+    Return:
+        - the err 403 using abort
+    """
+    abort(403)
 
 
 @app_views.route('/stats/', strict_slashes=False)
