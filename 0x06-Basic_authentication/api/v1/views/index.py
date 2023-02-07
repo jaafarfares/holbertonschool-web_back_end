@@ -3,9 +3,6 @@
 """
 from flask import jsonify, abort
 from api.v1.views import app_views
-import sys
-sys.path.append('/home/jaafar/holberton/holbertonschool-web_back_end/0x06-Basic_authentication')
-
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
