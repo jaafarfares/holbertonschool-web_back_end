@@ -6,6 +6,8 @@ from flask import request
 from api.v1.auth.auth import Auth
 from models.user import User
 import uuid
+from typing import List, TypeVar
+import base64
 
 
 class SessionAuth(Auth):
@@ -43,6 +45,6 @@ class SessionAuth(Auth):
         """ returns
         a User instance based on a cookie value
         """
-        session_id = self.session_cookie(request)
-        user_id = self.user_id_for_session_id(session_id)
+        sessions = self.session_cookie(request)
+        user_id = self.user_id_for_session_id(sessions)
         return User.get(user_id)
