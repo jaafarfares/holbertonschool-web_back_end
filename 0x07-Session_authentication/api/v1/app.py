@@ -59,13 +59,15 @@ def handle_before_request() -> None:
         '/api/v1/status/',
         '/api/v1/unauthorized/',
         '/api/v1/forbidden/']
-    if auth.session_cookie(request) is None:
+    if request.path in excluded_paths:
+        return
+
+    authorization_header = auth.authorization_header(request)
+    session_cookie = auth.session_cookie(request)
+
+    if authorization_header is None and session_cookie is None:
         abort(401)
 
-    if not auth.require_auth(request.path, excluded_paths):
-        return
-    if auth.authorization_header(request) is None:
-        abort(401)
     if auth.current_user(request) is None:
         abort(403)
 
