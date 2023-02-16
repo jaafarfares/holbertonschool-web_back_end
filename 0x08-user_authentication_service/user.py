@@ -23,15 +23,11 @@ class User(Base):
     session_id = Column(String)
     reset_token = Column(String)
 
-    def __init__(self, id, email, hashed_passowrd, session_id, reset_token):
+    def __init__(self):
         """
         function reper
         """
-        self.id = id
-        self.email = email
-        self.hashed_passowrd = hashed_passowrd
-        self.session_id = session_id
-        self.reset_token = reset_token
+
 
         return (
             self.id,
