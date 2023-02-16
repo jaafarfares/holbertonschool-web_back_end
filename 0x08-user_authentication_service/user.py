@@ -27,10 +27,8 @@ class User(Base):
         """
         function reper
         """
-
-        return (
-            self.id,
-            self.email,
-            self.hashed_password,
-            self.session_id,
-            self.reset_token)
+        self.id = id
+        self.email = email
+        self.hashed_passowrd = hashed_passowrd
+        self.session_id = session_id
+        self.reset_token = reset_token
