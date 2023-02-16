@@ -28,7 +28,6 @@ class User(Base):
         function reper
         """
 
-
         return (
             self.id,
             self.email,
