@@ -18,17 +18,6 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     email = Column(String)
-
     hashed_password = Column(String)
     session_id = Column(String)
     reset_token = Column(String)
-
-    def __init__(self):
-        """
-        function reper
-        """
-        self.id = id
-        self.email = email
-        self.hashed_passowrd = hashed_passowrd
-        self.session_id = session_id
-        self.reset_token = reset_token
