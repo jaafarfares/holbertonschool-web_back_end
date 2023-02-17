@@ -5,7 +5,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from typing import Tuple
 from user import Base, User
 
 
@@ -30,7 +29,7 @@ class DB(User):
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str, hashed_password: str) -> Tuple:
+    def add_user(self, email: str, hashed_password: str) -> User:
         """
         add user a to the database
         """
