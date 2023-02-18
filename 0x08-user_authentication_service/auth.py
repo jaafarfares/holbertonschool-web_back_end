@@ -17,8 +17,7 @@ def _hash_password(password: str) -> str:
 
 
 def _generate_uuid() -> str:
-    """_summary_
-
+    """ uuid generator
     Returns:
         str: random uuid
     """
@@ -54,3 +53,17 @@ class Auth:
                 return True
         except (ValueError, AttributeError,  NoResultFound):
             return False
+
+    def create_session(self, email:str) -> str:
+        """
+        craete session
+        """
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                session_id = _generate_uuid()
+                self._db.update_user(user.id, session_id=session_id)
+                return session_id
+        except NoResultFound:
+            return None
+
