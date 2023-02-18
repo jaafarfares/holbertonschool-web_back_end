@@ -51,12 +51,9 @@ class DB:
             raise NoResultFound
 
     def update_user(self, user_id: int, **args) -> None:
-        """
-        update user method
-        """
-        try:
-            self._session.query(User).filter(
-                self.find_user_by(id=user_id)).update(args)
-        except ValueError:
+        """user update method"""
+        if not user_id:
             raise ValueError
+        self._session.query(User).filter(
+            self.find_user_by(id=user_id)).update(args)
         self._session.commit()
