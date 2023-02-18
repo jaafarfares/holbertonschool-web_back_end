@@ -17,7 +17,7 @@ class DB:
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
-        self._engine = create_engine("sqlite:///a.db", echo=True)
+        self._engine = create_engine("sqlite:///a.db", echo=False)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -54,6 +54,8 @@ class DB:
         """ update the user attributes"""
         if not user_id:
             raise ValueError
-        self._session.query(User).filter(
-            self.find_user_by(id=user_id)).update(args)
+        user = self.find_user_by(id=user_id)
+        for key, value in args.items():
+            if hasattr(user, key):
+                setattr(user, key, value)
         self._session.commit()
