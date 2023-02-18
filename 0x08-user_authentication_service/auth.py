@@ -6,6 +6,7 @@ import bcrypt
 
 
 def _hash_password(password):
+    """function to hash the password"""
     if password:
         hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         return hashed
