@@ -54,5 +54,6 @@ class DB:
         """ update the user attributes"""
         if not user_id:
             raise ValueError
-        self._session.query(User).filter(self.find_user_by(id=user_id)).update(args)
+        self._session.query(User).filter(
+            self.find_user_by(id=user_id)).update(args)
         self._session.commit()
