@@ -6,13 +6,20 @@ from auth import Auth
 app = Flask(__name__)
 AUTH = Auth()
 
+
 @app.route("/", methods=['GET'])
 def index():
+    """
+    basic flask app
+    """
     return jsonify({"message": "Bienvenue"})
 
 
 @app.route("/users", methods=['POST'])
 def users() -> str:
+    """
+    register user app
+    """
     email = request.form.get("email")
     password = request.form.get("password")
     try:
