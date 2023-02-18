@@ -54,7 +54,7 @@ class Auth:
         except (ValueError, AttributeError,  NoResultFound):
             return False
 
-    def create_session(self, email:str) -> str:
+    def create_session(self, email: str) -> str:
         """
         craete session
         """
@@ -66,4 +66,3 @@ class Auth:
                 return session_id
         except NoResultFound:
             return None
-
