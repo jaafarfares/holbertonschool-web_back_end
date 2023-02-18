@@ -52,8 +52,6 @@ class DB:
 
     def update_user(self, user_id: int, **args) -> None:
         """ update the user attributes"""
-        if not user_id:
-            raise ValueError
         user = self.find_user_by(id=user_id)
         for key, value in args.items():
             if hasattr(user, key):
