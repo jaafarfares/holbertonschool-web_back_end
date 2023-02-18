@@ -6,6 +6,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from user import Base, User
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 
 class DB:
@@ -36,4 +38,15 @@ class DB:
         user = User(email=email, hashed_password=hashed_password)
         self._session.add(user)
         self._session.commit()
+        return user
+
+    def find_user_by(self, **id) -> User:
+        """ function to find the user
+        query the first user from database table
+        """
+        if not id:
+            raise InvalidRequestError
+        user = self._session.query(User).filter_by(**id).first()
+        if not user:
+            raise NoResultFound
         return user
