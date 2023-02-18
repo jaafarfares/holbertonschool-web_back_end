@@ -52,10 +52,8 @@ class DB:
 
     def update_user(self, user_id: int, **args) -> None:
         """user update method"""
-        user = self.find_user_by(id=user_id)
-        for key, value in args.items():
-            if hasattr(user, key):
-                setattr(user, key, value)
-            else:
-                raise ValueError
+        if not user_id:
+            raise ValueError
+        self._session.query(User).filter(
+            self.find_user_by(id=user_id)).update(args)
         self._session.commit()
