@@ -10,7 +10,7 @@ from sqlalchemy.sql import exists
 from uuid import uuid4
 
 
-def _hash_password(password: str) -> bytes:
+def _hash_password(password: str) -> str:
     """function to hash the password"""
     hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     return hashed
