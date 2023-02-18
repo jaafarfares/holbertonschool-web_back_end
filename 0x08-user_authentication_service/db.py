@@ -49,13 +49,15 @@ class DB:
         user = self._session.query(User).filter_by(**id).first()
         if not user:
             raise NoResultFound
+        return user
 
     def update_user(self, user_id: int, **args) -> None:
         """user update method"""
-        user = self.find_user_by(id=user_id)
-        for key, value in args.items():
-            if hasattr(user, key):
-                setattr(user, key, value)
-            else:
-                raise ValueError
+        try:
+            user = self.find_user_by(id=user_id)
+            for key, value in args.items():
+                if hasattr(user, key):
+                    setattr(user, key, value)
+        except  ValueError:
+            raise ValueError
         self._session.commit()
