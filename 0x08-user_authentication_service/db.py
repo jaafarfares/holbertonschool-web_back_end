@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """DB module
 """
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, update
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
@@ -49,4 +49,10 @@ class DB:
         user = self._session.query(User).filter_by(**id).first()
         if not user:
             raise NoResultFound
-        return user
+
+    def update_user(self, user_id: int, **args) -> None:
+        """ update the user attributes"""
+        if not user_id:
+            raise ValueError
+        self._session.query(User).filter(self.find_user_by(id=user_id)).update(args)
+        self._session.commit()
