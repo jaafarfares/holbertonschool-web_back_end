@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """flask app
 """
-from flask import Flask, jsonify, request, abort, redirect
+from flask import *
 from auth import Auth
 app = Flask(__name__)
 AUTH = Auth()
@@ -38,10 +38,10 @@ def login() -> str:
     password = request.form.get("password")
 
     if AUTH.valid_login(email, password):
-        response = jsonify({"email": "<user email>", "message": "logged in"})
-        return response.set_cookie('session_id', AUTH.create_session(email))
-    else:
-        abort(401)
+        response = jsonify({"email": email, "message": "logged in"})
+        session_id = AUTH.create_session(email)
+        return response.set_cookie('session_id', session_id)
+    abort(401)
 
 
 if __name__ == "__main__":
