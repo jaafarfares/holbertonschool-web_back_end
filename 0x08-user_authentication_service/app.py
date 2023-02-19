@@ -42,7 +42,7 @@ def login() -> str:
         response.set_cookie('session_id', session_id, secure=True, httponly=True)
         return response
 
-    return abort(401)
+    abort(401)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
