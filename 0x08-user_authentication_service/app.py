@@ -41,7 +41,7 @@ def login() -> str:
         response = jsonify({"email": email, "message": "logged in"})
         response.set_cookie('session_id', session_id, secure=True, httponly=True)
         return response
-    return jsonify({"message": "Invalid email or password"}), abort(401)
+    abort(401)
 
 
 if __name__ == "__main__":
