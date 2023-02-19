@@ -37,7 +37,9 @@ def login() -> str:
     password = request.form.get("password")
 
     if AUTH.valid_login(email, password):
-        return AUTH.create_session(email)
+        response = jsonify({"email": "<user email>", "message": "logged in"})
+        response.set_cookie('session_id', AUTH.create_session(email))
+        return response.set_cookie('session_id', AUTH.create_session(email))
     abort(401)
 
 
