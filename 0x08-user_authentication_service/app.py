@@ -28,6 +28,18 @@ def users() -> str:
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
 
+@app.route("/sessions", methods=['POST'], strict_slashes=False)
+def login():
+    """
+    register user app
+    """
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    if AUTH.valid_login(email, password):
+        return AUTH.create_session(email)
+    abort(401)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
