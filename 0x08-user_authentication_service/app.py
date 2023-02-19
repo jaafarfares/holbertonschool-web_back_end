@@ -40,7 +40,8 @@ def login() -> str:
     if AUTH.valid_login(email, password):
         response = jsonify({"email": "<user email>", "message": "logged in"})
         return response.set_cookie('session_id', AUTH.create_session(email))
-    abort(401)
+    else:
+        abort(401)
 
 
 if __name__ == "__main__":
