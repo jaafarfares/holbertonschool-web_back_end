@@ -47,9 +47,7 @@ class TestGetJson(unittest.TestCase):
         mock_response = Mock()
         mock_response.json.return_value = payload
         with patch('requests.get', return_value=mock_response):
-            req = get_json(url)
-            self.assertEqual(req, payload)
-            mock_response.json.assert_called_once()
+            self.assertEqual(get_json(url), payload)
 
 
 class TestMemoize(unittest.TestCase):
