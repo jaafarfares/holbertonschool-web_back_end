@@ -2,15 +2,14 @@
 """
 first unittest
 """
-import unittest
-from unittest import mock
+from unittest import TestCase, main, mock
 from unittest.mock import patch, MagicMock, Mock
 from utils import *
 from parameterized import parameterized
 from collections.abc import Mapping
 
 
-class TestAccessNestedMap(unittest.TestCase):
+class TestAccessNestedMap(TestCase):
     """_summary_
     Args:
         unittest (TestCase): test_access_nested_map
@@ -35,7 +34,7 @@ class TestAccessNestedMap(unittest.TestCase):
         self.assertRaises(ex)
 
 
-class TestGetJson(unittest.TestCase):
+class TestGetJson(TestCase):
     """
     get json test class
     """
@@ -49,11 +48,11 @@ class TestGetJson(unittest.TestCase):
         """
         mock_response = Mock()
         mock_response.json.return_value = payload
-        with patch('requests.get', return_value=mock_response):
+        with mock.patch('requests.get', return_value=mock_response):
             req = get_json(url)
             self.assertEqual(req, payload)
             mock_response.json.assert_called_once()
 
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
