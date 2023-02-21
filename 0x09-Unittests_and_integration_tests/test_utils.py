@@ -60,7 +60,6 @@ class TestMemoize(unittest.TestCase):
     test momoize class
     """
 
-    @unittest.expectedFailure
     def test_memoize(self):
         """
         test_memoize function
@@ -80,7 +79,7 @@ class TestMemoize(unittest.TestCase):
 
 
         test = TestClass()
-        with mock.patch.object(TestClass, 'a_method') as mock_method:
+        with patch.object(TestClass, 'a_method') as mock_method:
             mock_method.return_value = 42
             returned = test.a_property
             self.assertEqual(returned, 42)
