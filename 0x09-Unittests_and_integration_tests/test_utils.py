@@ -3,14 +3,10 @@
 first unittest
 """
 import unittest
-from unittest.mock import patch, MagicMock
-from utils import get_json, access_nested_map
+from unittest.mock import patch, MagicMock, Mock
+from utils import *
 from parameterized import parameterized
 from collections.abc import Mapping
-
-
-if __name__ == '__main__':
-    unittest.main()
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -42,13 +38,44 @@ class TestGetJson(unittest.TestCase):
     """
     get json test class
     """
-    @patch('utils.requests')
-    def test_get_json(self, mock_requests):
+    @parameterized.expand([('test_url=http://example.com',
+                            {"payload": True}),
+                           ('test_url=http://holberton.io',
+                            {"payload": False})])
+    def test_get_json(self, url, payload):
         mock_response = MagicMock()
         mock_response.status_code = 200
-        mock_response.json.return_value = {{'test_url="http://example.com"',
-                                            'test_payload={"payload": True}'},
-                                           {'test_url="http://holberton.io"',
-                                            'test_payload={"payload": False}'}}
-        mock_requests.get.return_value = mock_response
-        self.assertEqual(get_json(), ('False', 'True'))
+        mock_response.json.return_value = payload
+        with patch('requests.get', return_value=mock_response):
+            self.assertEqual(get_json(url), payload)
+            mock_response.json.assert_called_once()
+
+
+class TestMemoize(unittest.TestCase):
+    """
+    test momoize class
+    """
+
+    def test_memoize():
+        """
+        test_memoize function
+        """
+        class TestClass:
+            """test class"""
+
+            def a_method(self):
+                """method"""
+                return 42
+
+            @memoize
+            @patch.object(TestMemoize.TestClass, 'a_method', return_value=42)
+            def a_property(self):
+                """method"""
+            test = TestMemoize.TestClass()
+            returne = test.a_property
+            self.assertEqual(returne, 42)
+                return self.a_method()
+
+
+if __name__ == '__main__':
+    unittest.main()
