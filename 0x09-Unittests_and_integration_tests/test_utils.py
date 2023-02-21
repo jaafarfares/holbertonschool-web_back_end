@@ -3,7 +3,7 @@
 first unittest
 """
 from unittest import TestCase, main, mock
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 from utils import *
 from parameterized import parameterized
 from collections.abc import Mapping
