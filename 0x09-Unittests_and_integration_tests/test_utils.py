@@ -3,7 +3,6 @@
 first unittest
 """
 import unittest
-from unittest import mock
 from unittest.mock import patch, MagicMock, Mock
 from utils import *
 from parameterized import parameterized
@@ -44,10 +43,12 @@ class TestGetJson(unittest.TestCase):
                            ('test_url=http://holberton.io',
                             {"payload": False})])
     def test_get_json(self, url, payload):
-        mock_response = Mock()
+        """test get_json function"""
+        mock_response = MagicMock()
         mock_response.json.return_value = payload
         with patch('requests.get', return_value=mock_response):
             self.assertEqual(get_json(url), payload)
+            mock_response.json.assert_called_once()
 
 
 class TestMemoize(unittest.TestCase):
