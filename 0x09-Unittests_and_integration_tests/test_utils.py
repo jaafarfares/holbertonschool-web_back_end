@@ -55,7 +55,7 @@ class TestGetJson(unittest.TestCase):
             mock_response.json.assert_called_once()
 
 
-class TestMemoize(TestCase):
+class TestMemoize(unittest.TestCase):
     """
     test momoize class
     """
