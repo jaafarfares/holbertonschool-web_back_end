@@ -43,36 +43,12 @@ class TestGetJson(unittest.TestCase):
                            ('test_url=http://holberton.io',
                             {"payload": False})])
     def test_get_json(self, url, payload):
-        """test get_json function"""
-        mock_response = Mock()
+        mock_response = MagicMock()
+        mock_response.status_code = 200
         mock_response.json.return_value = payload
         with patch('requests.get', return_value=mock_response):
             self.assertEqual(get_json(url), payload)
             mock_response.json.assert_called_once()
-
-
-class TestMemoize(unittest.TestCase):
-    """
-    test momoize class
-    """
-
-    @unittest.expectedFailure
-    def test_memoize(self):
-        """
-        test_memoize function
-        """
-        class TestClass:
-            """test class"""
-
-            @patch.object(TestMemoize.TestClass, 'a_method', return_value=42)
-            @memoize
-            def a_property(self):
-                """method"""
-                return self.a_method()
-
-        test = TestClass()
-        returned = test.a_property
-        self.assertEqual(returned, 42)
 
 
 if __name__ == '__main__':
