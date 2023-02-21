@@ -44,7 +44,6 @@ class TestGetJson(unittest.TestCase):
                             {"payload": False})])
     def test_get_json(self, url, payload):
         mock_response = MagicMock()
-        mock_response.status_code = 200
         mock_response.json.return_value = payload
         with patch('requests.get', return_value=mock_response):
             self.assertEqual(get_json(url), payload)
