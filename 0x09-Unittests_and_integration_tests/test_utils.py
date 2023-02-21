@@ -60,13 +60,17 @@ class TestMemoize(unittest.TestCase):
     test momoize class
     """
 
-    @unittest.expectedFailure
     def test_memoize(self):
         """
         test_memoize function
         """
         class TestClass:
             """test class"""
+
+            def a_method(self):
+                """method that returns 42"""
+                return 42
+
 
             @memoize
             def a_property(self):
