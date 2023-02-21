@@ -10,7 +10,7 @@ from unittest import mock, TestCase, main
 from unittest.mock import patch
 
 
-class TestAccessNestedMap(TestCase):
+class TestAccessNestedMap(unittest.TestCase):
     """_summary_
     Args:
         unittest (TestCase): test_access_nested_map
