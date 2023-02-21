@@ -2,11 +2,12 @@
 """
 first unittest
 """
-from unittest import TestCase, main, mock
-from unittest.mock import patch, Mock
-from utils import *
+import unittest
+from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
-from collections.abc import Mapping
+from typing import Mapping, Sequence
+from unittest import mock, TestCase, main
+from unittest.mock import patch
 
 
 class TestAccessNestedMap(TestCase):
