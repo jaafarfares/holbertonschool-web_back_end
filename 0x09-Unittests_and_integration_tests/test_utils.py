@@ -35,14 +35,14 @@ class TestAccessNestedMap(TestCase):
         self.assertRaises(ex)
 
 
-class TestGetJson(TestCase):
+class TestGetJson(unittest.TestCase):
     """
-    get json test class
+    get_json test class
     """
-    @parameterized.expand([('test_url=http://example.com',
-                            {"payload": True}),
-                           ('test_url=http://holberton.io',
-                            {"payload": False})])
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
     def test_get_json(self, url, payload):
         """
         test get_json method
