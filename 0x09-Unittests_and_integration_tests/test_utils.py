@@ -3,7 +3,7 @@
 first unittest
 """
 from unittest import TestCase, main, mock
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch
 from utils import *
 from parameterized import parameterized
 from collections.abc import Mapping
@@ -46,7 +46,7 @@ class TestGetJson(TestCase):
         """
         test get_json function
         """
-        mock_response = Mock()
+        mock_response = mock.Mock()
         mock_response.json.return_value = payload
         with mock.patch('requests.get', return_value=mock_response):
             req = get_json(url)
