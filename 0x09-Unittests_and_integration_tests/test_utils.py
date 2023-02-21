@@ -45,13 +45,13 @@ class TestGetJson(TestCase):
                             {"payload": False})])
     def test_get_json(self, url, payload):
         """
-        test get_json function
+        test get_json method
         """
         mock_response = mock.Mock()
         mock_response.json.return_value = payload
+
         with mock.patch('requests.get', return_value=mock_response):
-            req = get_json(url)
-            self.assertEqual(req, payload)
+            self.assertEqual(get_json(url), payload)
             mock_response.json.assert_called_once()
 
 
