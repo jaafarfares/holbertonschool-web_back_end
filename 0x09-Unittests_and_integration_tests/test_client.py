@@ -3,10 +3,9 @@
 first unittest
 """
 import unittest
-from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 from typing import Mapping, Sequence
-from unittest.mock import patch
+from unittest.mock import patch, PropertyMock
 from unittest import mock
 from client import GithubOrgClient
 
@@ -25,17 +24,17 @@ class TestGithubOrgClient(unittest.TestCase):
 
 
     @patch('client.get_json')
-    def test_public_repos(self, mock_get_json):
-        """
-        method to test public_repos
-        """
+    def test_public_repos(self, mocked_method):
+        '''self descriptive'''
         mock_payload = [{"name": "Microsoft"}, {"name": "Apple"}, {"name": "Amazon"}]
-        mock_get_json.return_value = mock_payload
-        client = GithubOrgClient("test-org")
-        repos = client.public_repos()
-        expected_repos = ["Microsoft", "Apple", "Amazon"]
-        self.assertEqual(repos, expected_repos)
-        mock_get_json.assert_called_once()
+        mocked_method.return_value = mock_payload
+
+        with patch('client.GithubOrgClient._public_repos_url',
+                   new_callable=PropertyMock) as mocked_public:
+            mocked_public.return_value = "world"
+            response = GithubOrgClient('test-org').public_repos()
+            self.assertEqual(response, ["Microsoft", "Apple", "Amazon"])
+            mocked_public.assert_called_once()
 
 
 
