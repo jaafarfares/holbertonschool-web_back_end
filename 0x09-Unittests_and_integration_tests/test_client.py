@@ -29,9 +29,9 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         method to test public_repos
         """
-        mock_public_repos.return_value = [("repo1"), ("repo2"), ("repo3")]
+        mock_public_repos.return_value = ["repo1", "repo2", "repo3"]
         repos = GithubOrgClient("my-github-org").public_repos()
-        self.assertEqual(repos, [("repo1"), ("repo2"), ("repo3")])
+        self.assertEqual(repos, ["repo1", "repo2", "repo3"])
         mock_public_repos.assert_called_once()
 
 
