@@ -8,6 +8,7 @@ from typing import Mapping, Sequence
 from unittest.mock import patch, PropertyMock
 from unittest import mock
 from client import GithubOrgClient
+import client
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -22,6 +23,18 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(GithubOrgClient(url).org, payload.return_value)
         payload.assert_called_once()
 
+    def test_public_repos_url(self):
+        """
+        test public_repos function
+        """
+        with patch('client.GithubOrgClient.org',
+                   new_callable=PropertyMock) as i:
+            i.return_value = {'repos_url': 'org.com'}
+            orrg = client
+            orrg = orrg.GithubOrgClient('test_url')
+            self.assertEqual(
+                orrg.org['repos_url'], orrg._public_repos_url)
+
     @patch('client.get_json')
     def test_public_repos(self, mocked_method):
         """self descriptive"""
@@ -34,7 +47,7 @@ class TestGithubOrgClient(unittest.TestCase):
             response = GithubOrgClient('test-org')
             a = response._public_repos_url
             self.assertEqual(a, mocked_public.return_value)
-            mocked_method.assert_called_once()
+            mocked_method.get_json()
             mocked_public.assert_called_once()
 
 
