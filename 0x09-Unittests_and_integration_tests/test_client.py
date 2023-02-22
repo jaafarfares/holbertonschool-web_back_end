@@ -24,15 +24,26 @@ class TestGithubOrgClient(unittest.TestCase):
         payload.assert_called_once()
 
 
-    @patch('client.GithubOrgClient.public_repos')
-    def test_public_repos(self, mock_public_repos):
-        """
-        method to test public_repos
-        """
-        mock_public_repos.return_value = ["repo1", "repo2", "repo3"]
-        repos = GithubOrgClient("my-github-org").public_repos()
-        self.assertEqual(repos, ["repo1", "repo2", "repo3"])
-        mock_public_repos.assert_called_once()
+@parameterized.expand([
+        ("org", "repos", ["repo1", "repo2", "repo3"], ["repo2"]),
+        ("org", "repos_no_license", ["repo1", "repo3"], ["repo1", "repo3"])
+    ])
+def test_public_repos(self, org_payload, expected_repos, apache2_repos):
+    """
+    Test GithubOrgClient.public_repos
+    """
+    with patch('client.public_repos') as mock_get_json:
+        mock_get_json.side_effect = [
+            {"repos_url": f"https://api.github.com/{org_payload}/repos"},
+            [{"name": repo, "license": {"key": "apache-2.0"}} if repo in apache2_repos else {"name": repo, "license": None} for repo in expected_repos]
+        ]
+        client = GithubOrgClient("my-github-org")
+        repos = client.public_repos()
+        self.assertEqual(repos, expected_repos)
+        mock_get_json.assert_called()
+        client._public_repos_url.assert_called()
+        repos = client.public_repos("apache-2.0")
+        self.assertEqual(repos, apache2_repos)
 
 
 if __name__ == '__main__':
