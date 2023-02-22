@@ -23,6 +23,17 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(GithubOrgClient(url).org, payload.return_value)
         payload.assert_called_once()
 
+    @patch('client.GithubOrgClient.public_repos')
+    def test_public_repos(self, mock_public_repos):
+        """
+        method to test public_repos
+        """
+        mock_public_repos.return_value = ["repo1", "repo2", "repo3"]
+
+        repos = GithubOrgClient("my-github-org").public_repos()
+        self.assertEqual(repos, ["repo1", "repo2", "repo3"])
+        mock_public_repos.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()
