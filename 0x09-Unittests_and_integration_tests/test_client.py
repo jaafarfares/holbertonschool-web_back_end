@@ -40,11 +40,12 @@ class TestGithubOrgClient(unittest.TestCase):
         """self descriptive"""
         mock_payload = [{"name": "Microsoft"}, {"name": "Apple"}]
         mocked_method.return_value = mock_payload
+        g = "google"
+        response = GithubOrgClient(g)
 
         with patch('client.GithubOrgClient._public_repos_url',
                    new_callable=PropertyMock) as mocked_public:
             mocked_public.return_value = ["Microsoft", "Apple"]
-            response = GithubOrgClient('google')
             self.assertEqual(response.public_repos(), mocked_public.return_value)
             mocked_method.assert_called_once()
             mocked_public.assert_called_once()
