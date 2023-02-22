@@ -32,7 +32,7 @@ def test_public_repos(self, org_payload, expected_repos, apache2_repos):
     """
     Test GithubOrgClient.public_repos
     """
-    with patch('client.public_repos') as mock_get_json:
+    with patch('client.get_json') as mock_get_json:
         mock_get_json.side_effect = [
             {"repos_url": f"https://api.github.com/{org_payload}/repos"},
             [{"name": repo, "license": {"key": "apache-2.0"}} if repo in apache2_repos else {"name": repo, "license": None} for repo in expected_repos]
