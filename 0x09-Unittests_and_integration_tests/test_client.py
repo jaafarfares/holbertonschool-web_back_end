@@ -25,7 +25,10 @@ class TestGithubOrgClient(unittest.TestCase):
 
 
 @patch('client.get_json')
-def test_public_repos_another(self, mock_get_json):
+def test_public_repos(self, mock_get_json):
+    """
+    method to test public_repos
+    """
     mock_payload = [{"name": "Microsoft"}, {"name": "Apple"}, {"name": "Amazon"}]
     mock_get_json.return_value = mock_payload
     client = GithubOrgClient("test-org")
