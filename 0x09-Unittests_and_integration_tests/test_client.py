@@ -8,6 +8,7 @@ from parameterized import parameterized
 from typing import Mapping, Sequence
 from unittest.mock import patch
 from unittest import mock
+from client import GithubOrgClient
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -15,7 +16,13 @@ class TestGithubOrgClient(unittest.TestCase):
     test github org client class
     """
 
-    @parameterized.expand([(google), (abc)])
-    def test_org(self, ):
+    @parameterized.expand([("google"), ("abc")])
+    @patch('client.get_json')
+    def test_org(self, url, payload):
         """test org class"""
-        
+        self.assertEqual(GithubOrgClient(url).org, payload.return_value)
+        payload.assert_called_once()
+
+
+if __name__ == '__main__':
+    unittest.main()
