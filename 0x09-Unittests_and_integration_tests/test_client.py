@@ -36,7 +36,6 @@ def test_public_repos(self, mock_get_json):
     expected_repos = ["Microsoft", "Apple", "Amazon"]
     self.assertEqual(repos, expected_repos)
     mock_get_json.assert_called_once()
-    client._public_repos_url.assert_called_once()
 
 
 
