@@ -24,18 +24,18 @@ class TestGithubOrgClient(unittest.TestCase):
         payload.assert_called_once()
 
 
-@patch('client.get_json')
-def test_public_repos(self, mock_get_json):
-    """
-    method to test public_repos
-    """
-    mock_payload = [{"name": "Microsoft"}, {"name": "Apple"}, {"name": "Amazon"}]
-    mock_get_json.return_value = mock_payload
-    client = GithubOrgClient("test-org")
-    repos = client.public_repos()
-    expected_repos = ["Microsoft", "Apple", "Amazon"]
-    self.assertEqual(repos, expected_repos)
-    mock_get_json.assert_called_once()
+    @patch('client.get_json')
+    def test_public_repos(self, mock_get_json):
+        """
+        method to test public_repos
+        """
+        mock_payload = [{"name": "Microsoft"}, {"name": "Apple"}, {"name": "Amazon"}]
+        mock_get_json.return_value = mock_payload
+        client = GithubOrgClient("test-org")
+        repos = client.public_repos()
+        expected_repos = ["Microsoft", "Apple", "Amazon"]
+        self.assertEqual(repos, expected_repos)
+        mock_get_json.assert_called_once()
 
 
 
