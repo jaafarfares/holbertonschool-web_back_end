@@ -22,7 +22,6 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(GithubOrgClient(url).org, payload.return_value)
         payload.assert_called_once()
 
-
     @patch('client.get_json')
     def test_public_repos(self, mocked_method):
         '''self descriptive'''
@@ -35,7 +34,6 @@ class TestGithubOrgClient(unittest.TestCase):
             response = GithubOrgClient('test-org').public_repos()
             self.assertEqual(response, ["Microsoft", "Apple"])
             mocked_public.assert_called_once()
-
 
 
 if __name__ == '__main__':
