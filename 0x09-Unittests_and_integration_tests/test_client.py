@@ -24,7 +24,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch('client.get_json')
     def test_public_repos(self, mocked_method):
-        '''self descriptive'''
+        """self descriptive"""
         mock_payload = [{"name": "Microsoft"}, {"name": "Apple"}]
         mocked_method.return_value = mock_payload
 
