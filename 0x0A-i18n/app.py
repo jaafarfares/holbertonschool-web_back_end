@@ -7,7 +7,6 @@ from datetime import datetime
 app = Flask(__name__, template_folder='templates')
 
 
-
 @app.route('/', methods=["GET"])
 def index():
     """
