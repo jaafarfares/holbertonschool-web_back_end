@@ -83,5 +83,30 @@ def hello_world():
     return render_template('6-index.html', welcome_message=welcome_message)
 
 
+@babel.timezoneselector
+def get_timezone():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
+    if g.get('timezone'):
+        try:
+            return pytz.timezone(g.timezone)
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    if request.cookies.get('timezone'):
+        try:
+            return pytz.timezone(request.cookies.get('timezone'))
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    if session.get('timezone'):
+        try:
+            return pytz.timezone(session.get('timezone'))
+        except pytz.exceptions.UnknownTimeZoneError:
+            pass
+    return pytz.utc
+
+
 if __name__ == '__main__':
     app.run()
