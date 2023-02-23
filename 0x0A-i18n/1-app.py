@@ -19,4 +19,4 @@ app.config.from_object(Config)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(use_reloader=True, debug=True)
