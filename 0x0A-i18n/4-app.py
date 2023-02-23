@@ -2,8 +2,9 @@
 """
 basic flask app1
 """
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g
 from flask_babel import Babel
+import locale
 app = Flask(__name__, template_folder='templates')
 babel = Babel(app)
 
@@ -23,6 +24,9 @@ def get_locale():
     """
     get_locale function
     """
+    user = getattr(g, 'user', None)
+    if user is not None:
+        return user.locale
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
