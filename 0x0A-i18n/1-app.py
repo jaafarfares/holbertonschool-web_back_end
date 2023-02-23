@@ -18,5 +18,13 @@ class Config:
 app.config.from_object(Config)
 
 
+@app.route('/')
+def index():
+    """
+    index function
+    """
+    return render_template('1-index.html')
+
+
 if __name__ == '__main__':
     app.run(use_reloader=True, debug=True)
