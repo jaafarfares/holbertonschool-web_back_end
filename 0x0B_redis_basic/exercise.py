@@ -3,12 +3,23 @@
 exercise file
 """
 import redis
+from functools import wraps
 import uuid
-from collections.abc import Callable
+from typing import Callable
 
 
-def count_calls(method: Callable)-> Callable:
-    return
+def count_calls(func: Callable) -> Callable:
+    """
+    count_calls decorator that takes a single method
+    Callable argument and returns a Callable. """
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        """ Incrementing values"""
+        key = func.__qualname__
+        self._redis.incr(key)
+        return func(self, *args, **kwargs)
+    return wrapper
+
 
 class Cache:
     """_summary_
@@ -20,6 +31,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: any) -> str:
         """generate a random key (e.g. using uuid),
         store the input data in
