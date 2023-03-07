@@ -40,6 +40,20 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(self, func: Callable) -> None:
+    """ retrieves the input and output history of a specified function stored
+    in Redis and prints a summary of its past usage."""
+    input_list = f"{func.__qualname__}:inputs"
+    output_list = f"{func.__qualname__}:outputs"
+    inputs = self._redis.lrange(input_list, 0, -1)
+    outputs = self._redis.lrange(output_list, 0, -1)
+    print(f"{func.__qualname__} was called {len(inputs)} times:")
+    for i, (input_str, output_str) in enumerate(zip(inputs, outputs)):
+        input_args = json.loads(input_str)
+        output_result = json.loads(output_str)
+        print(f"{func.__qualname__}{tuple(input_args)} -> {output_result}")
+
+
 class Cache:
     """_summary_
     """
