@@ -41,7 +41,7 @@ def call_history(method: Callable) -> Callable:
 
 
 def replay(self, func: Callable) -> None:
-    """ retrieves the input and output history of a specified function stored
+    """ retrieves the input and output history of specified function stored
     in Redis and prints a summary of its past usage."""
     input_list = f"{func.__qualname__}:inputs"
     output_list = f"{func.__qualname__}:outputs"
