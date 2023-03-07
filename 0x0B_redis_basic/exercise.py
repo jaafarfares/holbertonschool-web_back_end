@@ -27,16 +27,15 @@ def call_history(method: Callable) -> Callable:
     """store the history of inputs and
     outputs for a particular function."""
     @wraps(method)
-    def wrapper(*args, **kwargs):
+    def wrapper(self, *args, **kwargs):
         """wrapper function"""
-        r = redis.Redis()
         input_list = f"{method.__qualname__}:inputs"
         output_list = f"{method.__qualname__}:outputs"
         input_str = str(args)
-        r.rpush(input_list, input_str)
-        result = method(*args, **kwargs)
+        self._redis.rpush(input_list, input_str)
+        result = method(self, *args, **kwargs)
         output_str = str(result)
-        r.rpush(output_list, output_str)
+        self._redis.rpush(output_list, output_str)
         return result
     return wrapper
 
