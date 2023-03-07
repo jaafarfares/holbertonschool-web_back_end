@@ -5,20 +5,24 @@ exercise file
 import redis
 from functools import wraps
 import uuid
-from typing import Callable
+from typing import Callable, Union
 
 
-def count_calls(func: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
+    """count_calls
+    decorator that takes a single method
+    Callable argument and returns a Callable.
     """
-    count_calls decorator that takes a single method
-    Callable argument and returns a Callable. """
-    @wraps(func)
+    @wraps(method)
     def wrapper(self, *args, **kwargs):
         """ Incrementing values"""
-        key = func.__qualname__
+        key = method.__qualname__
         self._redis.incr(key)
-        return func(self, *args, **kwargs)
+        return method(self, *args, **kwargs)
     return wrapper
+
+def call_history(method: Callable) -> Callable:
+    return
 
 
 class Cache:
@@ -32,7 +36,7 @@ class Cache:
         self._redis.flushdb()
 
     @count_calls
-    def store(self, data: any) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """generate a random key (e.g. using uuid),
         store the input data in
         Redis using the random key and return the key."""
