@@ -3,6 +3,7 @@
 exercise file
 """
 import redis
+import json
 from functools import wraps
 import uuid
 from typing import Callable, Union
@@ -21,8 +22,23 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def call_history(method: Callable) -> Callable:
-    return
+    """store the history of inputs and
+    outputs for a particular function."""
+    @wraps(method)
+    def wrapper(*args, **kwargs):
+        """wrapper function"""
+        r = redis.Redis()
+        input_list = f"{method.__qualname__}:inputs"
+        output_list = f"{method.__qualname__}:outputs"
+        input_str = str(args)
+        r.rpush(input_list, input_str)
+        result = method(*args, **kwargs)
+        output_str = str(result)
+        r.rpush(output_list, output_str)
+        return result
+    return wrapper
 
 
 class Cache:
@@ -35,6 +51,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @call_history
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """generate a random key (e.g. using uuid),
