@@ -87,7 +87,7 @@ class Cache:
         return self.get(key, int)
 
 
-def replay(self, func: Callable) -> None:
+def replay(self, func: Callable) -> str:
     """ Retrieves the input and output history of specified function stored
     in Redis and prints a summary of its past usage."""
     method = func.__qualname__
