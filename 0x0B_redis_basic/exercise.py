@@ -86,15 +86,18 @@ class Cache:
         """
         return self.get(key, int)
 
-    def replay(self, func: Callable) -> None:
-        """ retrieves the input and output history of specified function stored
-        in Redis and prints a summary of its past usage."""
-        input_list = f"{func.__qualname__}:inputs"
-        output_list = f"{func.__qualname__}:outputs"
-        inputs = self._redis.lrange(input_list, 0, -1)
-        outputs = self._redis.lrange(output_list, 0, -1)
-        print(f"{func.__qualname__} was called {len(inputs)} times:")
-        for i, (input_str, output_str) in enumerate(zip(inputs, outputs)):
-            input_args = json.loads(input_str)
-            output_result = json.loads(output_str)
-            print(f"{func.__qualname__}{tuple(input_args)} -> {output_result}")
+
+def replay(self, func: Callable) -> None:
+    """ Retrieves the input and output history of specified function stored
+    in Redis and prints a summary of its past usage."""
+    method = func.__qualname__
+    inputs = f"{method}:inputs"
+    outputs = f"{method}:outputs"
+    input_list = self._redis.lrange(inputs, 0, -1)
+    output_list = self._redis.lrange(outputs, 0, -1)
+    number = self._redis.get(method).decode('utf-8')
+    print(f"{method} was called {number} times:")
+    for inp, out in zip(input_list, output_list):
+        input_args = json.loads(inp)
+        output_result = json.loads(out)
+        print(f"{method}{tuple(input_args)} -> {output_result}")
