@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ mongodb
- Python function that lists all documents in a collection
+Python function that lists all documents in a collection
 """
 
 
