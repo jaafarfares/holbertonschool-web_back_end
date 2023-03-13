@@ -8,8 +8,9 @@ Some of the key advantages of MongoDB include its ability to handle large volume
 
 Overall, MongoDB is a powerful and flexible NoSQL database that is well-suited for a wide range of applications and use cases, from small-scale projects to large-scale enterprise applications.
 
-in this project we will test and work with all those futures 
+in this project we will test and work with all those futures.
 
+#### Learning Objectives
 
 * What NoSQL means
 * What is difference between SQL and NoSQL
