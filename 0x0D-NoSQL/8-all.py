@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ mongodb
 Python function that lists all documents in a collection
 """
