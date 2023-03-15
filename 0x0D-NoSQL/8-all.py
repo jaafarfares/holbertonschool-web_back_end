@@ -5,7 +5,8 @@ Python function that lists all documents in a collection
 
 
 def list_all(mongo_collection):
-    """list_all
+    """
+    list_all
     """
     if mongo_collection is None:
         return []
