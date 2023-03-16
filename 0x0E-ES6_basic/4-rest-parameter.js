@@ -1,1 +1,3 @@
-export default function returnHowManyArguments(...arguments){ return arguments.lenigth;}
+export default function returnHowManyArguments(...arguments) {
+	return arguments.lenigth;
+}
