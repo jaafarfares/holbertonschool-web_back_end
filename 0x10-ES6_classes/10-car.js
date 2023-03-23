@@ -6,7 +6,7 @@ export default class Car {
   }
 
   static get [Symbol.species]() {
-  return this;
+    return this;
   }
 
   cloneCar() {
