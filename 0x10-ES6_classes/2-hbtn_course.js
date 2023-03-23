@@ -6,7 +6,7 @@ export default class HolbertonCourse {
     if (typeof (length) !== 'number') {
       throw TypeError('Length must be a number');
     }
-    if (!Array.isArray(students)) {
+    if (students.every((i) => (typeof i !== 'string'))) {
       throw new TypeError('Invalid argument type');
     }
 	this._name = name;
@@ -35,7 +35,7 @@ export default class HolbertonCourse {
       return this._students;
     }
     set students(value) {
-      if (!Array.isArray(value)) {
+      if (students.every((i) => (typeof i !== 'string'))) {
         throw TypeError('Students must be an array');
       }
       this._students = value;
