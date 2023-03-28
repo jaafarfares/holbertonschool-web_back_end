@@ -3,7 +3,7 @@ export default function getListStudentIds(arr) {
     return [];
   }
   return arr.map((x) => {
-    if (x.hasOwnProperty('id')) {
+    if (Object.prototype.hasOwnProperty.call(x, 'id')) {
       return x.id;
     }
     return [];
