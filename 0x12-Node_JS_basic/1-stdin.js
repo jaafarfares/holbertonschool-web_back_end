@@ -6,7 +6,9 @@ const rl = readline.createInterface({
 });
 
 rl.question('Welcome to Holberton School, what is your name?\n', (answer) => {
+  if (answer !== null) {
   console.log(`Your name is: ${answer}`);
+  }
   rl.close();
 });
 
