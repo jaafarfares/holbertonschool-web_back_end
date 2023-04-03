@@ -1,3 +1,4 @@
+process.stdin.setEncoding('utf8');
 const readline = require('readline');
 
 const rl = readline.createInterface({
