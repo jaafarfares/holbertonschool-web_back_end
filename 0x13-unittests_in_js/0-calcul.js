@@ -1,3 +1,3 @@
-export default function calculateNumber(a, b) {
-  return a + b
+module.exports = function calculateNumber(a, b) {
+    return a + b
 }
