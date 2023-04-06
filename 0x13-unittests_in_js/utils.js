@@ -1,4 +1,4 @@
-module.exports = class Utils {
+const Utils = {
     calculateNumber(type, a, b) {
         if (typeof a !== 'number' || typeof b !== 'number') {
           throw new TypeError('Parameters must be numbers');
@@ -27,3 +27,4 @@ module.exports = class Utils {
       }
 
  }
+ module.exports = Utils;
