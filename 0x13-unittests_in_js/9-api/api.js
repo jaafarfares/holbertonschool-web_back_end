@@ -3,7 +3,7 @@ const app = express();
 const port = 7865
 
 app.get('/', (req, res) => {
-    res.send('Welcome to the payment system')
+    res.end('Welcome to the payment system')
   });
 
   app.get('/cart/:id([0-9]+)', (req, res) => {
@@ -14,6 +14,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log(`API available on localhost port ${port}`);
   });
-
 
 module.exports = app;
