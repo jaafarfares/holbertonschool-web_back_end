@@ -1,17 +1,18 @@
-process.env.NODE_ENV = 'test';
-
-//Require the dev-dependencies
+const request = require('request');
 let chai = require('chai');
-let server = require('../server');
-describe('/GET', () => {
-    it('it should GET the response', (done) => {
-      chai.request(server)
-          .get('/book')
-          .end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('array');
-                res.body.length.should.be.eql(0);
-            done();
-          });
+
+describe('testiing', () => {
+    describe('GET /', () => {
+        it('Code: 200 | Body: Welcome to the payment system', (done) => {
+            const options = {
+                url: 'http://localhost:7865',
+                method: 'GET',
+            };
+            request(options, function (error, response, body) {
+                chai.expect(response.statusCode).to.equal(200);
+                chai.expect(body).to.equal('Welcome to the payment system');
+                done();
+        
+            });    });
     });
 });
