@@ -17,7 +17,7 @@ describe('testiing', () => {
             });    });
     });
     describe('GET /cart/12', () => {
-        it('get 200 res message', (done) => {
+        it('responds with 200 and "Welcome to the payment system" in the body',  (done) => {
           const options = {
             url: 'http://localhost:7865/cart/12',
             method: 'GET',
