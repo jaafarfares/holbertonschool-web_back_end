@@ -1,6 +1,5 @@
 const request = require('request');
-let chai = require('chai');
-
+const { expect } = require('chai');
 
 describe('testiing', () => {
     describe('GET /', () => {
@@ -10,8 +9,8 @@ describe('testiing', () => {
                 method: 'GET',
             };
             request(options, function (error, response, body) {
-                chai.expect(response.statusCode).to.equal(200);
-                chai.expect(body).to.equal('Welcome to the payment system');
+                expect(response.statusCode).to.equal(200);
+                expect(body).to.equal('Welcome to the payment system');
                 done();
         
             });    });
@@ -24,8 +23,8 @@ describe('testiing', () => {
           };
     
           request(options, function (error, response, body) {
-            chai.expect(response.statusCode).to.equal(200);
-            chai.expect(body).to.equal('Payment methods for cart 12');
+            expect(response.statusCode).to.equal(200);
+            expect(body).to.equal('Payment methods for cart 12');
             done();
           });
         });
