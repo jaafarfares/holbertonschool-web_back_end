@@ -6,7 +6,7 @@ const countStudents = require('./3-read_file_async');
 const DATABASE = args[0];
 
 const hostname = 'localhost';
-const port = 1245;
+const port = 1247;
 
 const app = http.createServer(async (req, res) => {
   res.statusCode = 200;
@@ -17,13 +17,11 @@ const app = http.createServer(async (req, res) => {
   if (url === '/') {
     res.write('Hello Holberton School!');
   } else if (url === '/students') {
+    const students = await countStudents(DATABASE);
+
     res.write('This is the list of our students\n');
-    try {
-      const students = await countStudents(DATABASE);
       res.end(`${students.join('\n')}`);
-    } catch (error) {
-      res.end(error.message);
-    }
+   
   }
   res.statusCode = 404;
   res.end();
