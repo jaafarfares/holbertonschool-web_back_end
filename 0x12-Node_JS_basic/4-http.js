@@ -1,15 +1,13 @@
-// create a small HTTP server using the http module:
-const http = require("http");
-const host = 'localhost';
-const port = 1245;
-const app = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello Holberton School!');
-  });
-   const server = http.createServer(app); 
-   server.listen(port, host, () => { 
-    console.log(`Server is running on http://${host}:${port}`); 
-   }); 
+const http = require('http');
 
-   module.exports = app;
+const app = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello Holberton School!\n');
+});
+
+app.listen(1245, () => {
+  console.log('Server is running on port 1245');
+});
+
+module.exports = app;
