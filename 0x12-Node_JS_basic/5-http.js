@@ -1,7 +1,7 @@
 const http = require('http');
 
 const host = 'localhost';
-const port = 1247;
+const port = 1245;
 const countStudents = require('./3-read_file_async');
 
 const filePath = process.argv[2];
